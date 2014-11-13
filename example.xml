@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<D:multistatus xmlns:D="DAV:" xmlns:J="http://example.org/jsprops/">
+   <D:response>
+      <D:href>http://example.org/MyColl/</D:href>
+      <D:propstat>
+         <D:prop>
+            <D:ordering-type>
+               <D:href>DAV:custom</D:href>
+            </D:ordering-type>
+            <D:resourcetype><D:collection/></D:resourcetype>
+         </D:prop>
+         <D:status>HTTP/1.1 200 OK</D:status>
+      </D:propstat>
+      <D:propstat>
+         <D:prop>
+            <J:latitude/>
+         </D:prop>
+         <D:status>HTTP/1.1 404 Not Found</D:status>
+      </D:propstat>
+   </D:response>
+   <D:response>
+      <D:href>http://example.org/MyColl/lakehazen.html</D:href>
+      <D:propstat>
+         <D:prop>
+            <D:resourcetype/>
+            <J:latitude>82N</J:latitude>
+         </D:prop>
+         <D:status>HTTP/1.1 200 OK</D:status>
+      </D:propstat>
+      <D:propstat>
+         <D:prop>
+            <D:ordering-type/>
+         </D:prop>
+         <D:status>HTTP/1.1 404 Not Found</D:status>
+      </D:propstat>
+   </D:response>
+   <D:response>
+      <D:href
+      >http://example.org/MyColl/siorapaluk.html</D:href>
+      <D:propstat>
+         <D:prop>
+            <D:resourcetype/>
+            <J:latitude>78N</J:latitude>
+         </D:prop>
+         <D:status>HTTP/1.1 200 OK</D:status>
+      </D:propstat>
+      <D:propstat>
+         <D:prop>
+            <D:ordering-type/>
+         </D:prop>
+         <D:status>HTTP/1.1 404 Not Found</D:status>
+      </D:propstat>
+   </D:response>
+   <D:response>
+      <D:href>http://example.org/MyColl/iqaluit.html</D:href>
+      <D:propstat>
+         <D:prop>
+            <D:resourcetype/>
+            <J:latitude>62N</J:latitude>
+         </D:prop>
+         <D:status>HTTP/1.1 200 OK</D:status>
+      </D:propstat>
+      <D:propstat>
+         <D:prop>
+            <D:ordering-type/>
+         </D:prop>
+         <D:status>HTTP/1.1 404 Not Found</D:status>
+      </D:propstat>
+   </D:response>
+   <D:response>
+      <D:href>http://example.org/MyColl/newyork.html</D:href>
+      <D:propstat>
+         <D:prop>
+            <D:resourcetype/>
+            <J:latitude>45N</J:latitude>
+         </D:prop>
+         <D:status>HTTP/1.1 200 OK</D:status>
+      <D:propstat>
+         <D:prop>
+            <D:ordering-type/>
+         </D:prop>
+         <D:status>HTTP/1.1 404 Not Found</D:status>
+      </D:propstat>
+      </D:propstat>
+   </D:response>
+</D:multistatus>

@@ -9,8 +9,8 @@ var getRes = function(req, res) {
     res.writeHead(207, {'Content-Type': 'text/plain'});
 
     //ToDo: correct XML for output
-    res.write('<?xml version="1.0" ?><D:multistatus xmlns:D="DAV:"><D:response><D:href>http://www.contoso.com/public/container/</D:href><D:propstat><D:prop xmlns:R="http://www.contoso.com/schema/"><R:author>Rob Caron</R:author><R:editor>Jessup Meng</R:editor><D:creationdate>1999-11-01T17:42:21-06:30</D:creationdate><D:displayname>Example Collection</D:displayname><D:resourcetype><D:collection></D:resourcetype><D:supportedlock><D:lockentry><D:lockscope><D:shared/></D:lockscope><D:locktype><D:write/></D:locktype></D:lockentry></D:supportedlock></D:prop><D:status>HTTP/1.1 200 OK</D:status></D:propstat></D:response></D:multistatus>'
-
+    res.write(
+        fs.readFileSync("example.xml")
     );
 
 
