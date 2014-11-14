@@ -1,26 +1,63 @@
+// Config
+var conf = {
+  port: 9000,
+  trace:  true
+};
+
+// --------------------------------
 var http  = require('http');
 var url   = require('url');
 var main  = require('./mainController');
 
-http.createServer(function (req, res) {
+main.configure(conf);
 
-  if('/favicon.ico' == req.url){ 
-  // favicon yet not present. 
-  // Also, let Chrome, not more ask about it after "404"
+http.createServer(function(req, res) {
+  log('');  // new line
+  log(req.method + ' ' + req.url);
+  log('=== headers beg ===');
+  log(req.headers);
+  // log('=== headers end ===');
 
-    res.writeHead(404, {'Content-Type': 'text/plain'});
-    res.end( );
-    //console.log(req.method, req.url);
+  // Dummy response
+  var response = {
+    status:   500,  // 500 - Server error
+    headers:  {},
+    body:   ''
+  };
 
-  } else { 
-  //requested some other as favicon, then proceed request
-    console.log(req.method, req.url);
+  // Routes
+  switch(req.url){
+    case '/favicon.ico':
+      // favicon yet not present. 
+      // Also, let Chrome, not more ask about it after "404"
+      response.status = 404;
+      response.headers = {'Content-Type': 'text/plain'};
+      //console.log(req.method, req.url);
+      break;
 
-    res = main.getRes(req, res); //mainController
+    default:
+      // requested some other as favicon, then proceed request
 
-    res.end();
+      // mainController
+      response = main.getRes(req);
+      break;
+  }
+
+  // Output
+  res.writeHead(response.status, response.headers);
+  res.end(response.body);
+
+}).listen(conf.port);
+console.log('Server running at port: ' + conf.port);
+
+
+
+// Logger
+function log(text){
+  if(conf.trace){
+    console.log(text);
+  }
 }
 
-}).listen(9000);
-console.log('Server running at port:9000/');
 
+// ----
