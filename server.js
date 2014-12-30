@@ -1,7 +1,8 @@
 // Config
 var conf = {
   port: 9000,
-  trace:  true
+  trace:  true,
+  traceStatus: ''
 };
 
 // --------------------------------
@@ -11,18 +12,23 @@ var main  = require('./mainController');
 
 main.configure(conf);
 
-http.createServer(function(req, res) {
-  log('');  // new line
-  log(req.method + ' ' + req.url);
-  log('=== headers beg ===');
-  log(req.headers);
-  // log('=== headers end ===');
 
-  // Dummy response
-  var response = {
+var trStat = 'server.js:';
+
+http.createServer(function(req, res) {
+
+  console.log('');  // new line
+  log('--- req.method+req.url: ' + req.method + ' ' + req.url);
+  log('--- req.headers begin:');
+  log(req.headers);
+  //log('--- req.body begin:');
+  //log(req.socket.parser);
+
+  // Dummy res
+  var resWorkObj = {
     status:   500,  // 500 - Server error
     headers:  {},
-    body:   ''
+    body:   '500 - Server error'
   };
 
   // Routes
@@ -30,8 +36,8 @@ http.createServer(function(req, res) {
     case '/favicon.ico':
       // favicon yet not present. 
       // Also, let Chrome, not more ask about it after "404"
-      response.status = 404;
-      response.headers = {'Content-Type': 'text/plain'};
+      resWorkObj.status = 404;
+      resWorkObj.headers = {'Content-Type': 'text/plain'};
       //console.log(req.method, req.url);
       break;
 
@@ -39,13 +45,18 @@ http.createServer(function(req, res) {
       // requested some other as favicon, then proceed request
 
       // mainController
-      response = main.getRes(req);
+      resWorkObj = main.getRes(req);
+        //log('--- log(RESPONSE) :');
+        //log(resWorkObj);
+
       break;
   }
 
   // Output
-  res.writeHead(response.status, response.headers);
-  res.end(response.body);
+  res.writeHead(resWorkObj.status, resWorkObj.headers);
+  res.end(resWorkObj.body);
+  log('--- log(RES) :');
+  log(res);
 
 }).listen(conf.port);
 console.log('Server running at port: ' + conf.port);
@@ -55,6 +66,10 @@ console.log('Server running at port: ' + conf.port);
 // Logger
 function log(text){
   if(conf.trace){
+    if(conf.traceStatus != trStat){
+      conf.traceStatus = trStat;
+      console.log('=====> ' + conf.traceStatus + ' <=====');
+    }
     console.log(text);
   }
 }
