@@ -54,7 +54,12 @@ http.createServer(function(req, res) {
 
   // Output
   res.writeHead(resWorkObj.status, resWorkObj.headers);
+  log('--- resWorkObj.body:');
+  log(resWorkObj.body);
+
   res.end(resWorkObj.body);
+  log('--- res._header:');
+  log(res._header);
   log('--- log(RES) :');
   log(res);
 

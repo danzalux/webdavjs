@@ -56,11 +56,15 @@ var getRes = function(req, conf) {
 			setOptions();
 			break;
 
+		// Other Methods
 		default:
-			// Other Methods
 			res.status	= 403;
-			res.body	= req.method + ' - 403 Method not supported';
-			log('--- '+ req.method + ' - 403 Method not supported');
+			res.headers = {
+				'Connection' : 'close',
+				'Content-Type': 'text/html'
+			};
+			res.body	= 'ERROR: ' + req.method + ' - 403 Method not supported';
+			log('--- ERROR: '+ req.method + ' - 403 Method not supported');
 			break;
 	}
 
